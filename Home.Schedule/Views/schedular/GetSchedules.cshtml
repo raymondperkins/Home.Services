@@ -1,0 +1,140 @@
+﻿@inherits ViewPage
+@{
+    ViewBag.Title = "Schedular";
+}
+
+<div class="row" ng-controller="SchedularCntrl">
+    <div class="col-md-12">
+        <p>
+        This page lists the schedules setup on this device. The time on the device is @DateTime.Now.ToString()
+        </p>
+    </div>
+    <div class="col-md-8">    
+        <table class="table table-striped">
+            <thead> 
+                <tr><th></th><th>Name</th><th>Active</th><th></th></tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in Model | filter:FilterText | orderBy:'Name'">
+                <td><a href="" ng-click="editScheduleModel(item)">Edit</a></td>
+                <td>{{item.Name}}</td>
+                <td>{{item.IsActive}}</td>
+                <td>{{item.Type}}</td>          
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+<script type="text/ng-template" id="scheduleModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a ng-click="selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="ok()">Save</button>
+    </div>
+</script>
+
+<script type="text/javascript">
+    var ScheduleModalInstanceCtrl = function ($scope, $http, $modalInstance, Model) {
+        $scope.Model = Model;
+
+        $scope.options = {
+            reoccur: [{ n: 'Never', v: 0 }, { n: 'Minute', v: 60}, { n: 'Hourly', v: 3600}, { n: '12 hours', v: 43200 }, { n: 'Daily', v: 86400 }, { n: 'Weekly', v: 604800 } ],
+            mstep: [1, 5, 10, 15, 25, 30]
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.ok = function () {
+            //$modalInstance.close($scope.selected.item);
+            $modalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+
+        $scope.$watch('Model.From', function(newValue, oldValue) {
+            var fromOld = new Date(oldValue);
+            var fromNew = new Date(newValue);
+            var mSecDiff = (fromNew.getTime() - fromOld.getTime());
+
+            var toNew = new Date($scope.Model.To);
+            toNew.setSeconds(0, mSecDiff);
+            $scope.Model.To = toNew;
+        });
+
+        $scope.$watch('Model.To', function(newValue, oldValue) {
+            var fromOld = new Date($scope.Model.From);
+            var toNew = new Date(newValue);
+            var mSecDiff = (toNew.getTime() - fromOld.getTime());
+            if(mSecDiff < 0)
+            {
+                $scope.Model.To = oldValue;
+            }
+        });
+    };
+</script>
+
+<script type="text/javascript">
+var modelUrl = window.location;
+function SchedularCntrl($scope, $http, $modal) {
+    $scope.Model = @Model.AsRawJson();
+
+    $scope.editScheduleModel = function (item) {
+        var templateurl = '/schedular/' + item.Id + '/template';
+        var modalInstance = $modal.open({
+            templateUrl: '/schedular/' + item.Id + '/template',//'scheduleModalContent.html',
+            controller: ScheduleModalInstanceCtrl,
+            resolve: {
+                Model: function () { return item; }
+            }
+        });
+
+
+        modalInstance.result.then(function (selectedItem) {
+            // item saved
+            var editmodel = item;
+            $scope.saveScheduleModel(item);
+        }, function () {
+            //$log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.saveScheduleModel = function (item) {
+        var url = '/schedular/' + item.Id;
+        var data = item;
+        $http.put(url, data)
+        .success(function(data,status,headers,config){
+            // handle success
+            if(data.success == true)
+            {
+                
+            }
+            else 
+            {
+                //$scope.alert.error("There was an error saving the changes. " + data.Message);
+            }
+        }).error(function(data,status,headers,config) {
+            // handle failure
+            //$scope.alert.error("There was an error saving the changes. Try again?");   
+        });
+    };
+}
+
+</script>

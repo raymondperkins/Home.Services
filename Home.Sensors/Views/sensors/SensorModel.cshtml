@@ -1,0 +1,20 @@
+﻿@inherits ViewPage
+@{
+    ViewBag.Title = "Sensor View";
+}
+
+<div class="row" ng-app ng-controller="SensorCntrl">
+    <div class="col-md-12">
+        <p>
+        This page allows the data to be viewed and changed for the sensor {{Model.Name}}.
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+var modelUrl = window.location;
+function SensorCntrl($scope, $http) {
+    $scope.Model = @Model.AsRawJson(); 
+}
+
+</script>

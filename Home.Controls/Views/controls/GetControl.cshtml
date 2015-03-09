@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Control";
+}
+
+<div class="row" ng-app ng-controller="ControlCntrl">
+    <div class="col-md-12">
+        <p>
+        This page allows the settings to be viewed and changed for the control {{Model.Name}}.
+        </p>
+        <div class="form-group">
+            <label>Max records to show</label>
+            <input type="text" class="form-control" ng-model="MaxRecordsToShow" placeholder="Max records">
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary" ng-click="saveControllerModel()">Save</button>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Setpoint</label>
+            <input type="text" class="form-control" ng-model="Model.Controller.TemperatureSetpoint" placeholder="Setpoint">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Setpoint margin</label>
+            <input type="text" class="form-control" ng-model="Model.Controller.TemperatureMargin" placeholder="Setpoint margin">
+          </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+var modelUrl = window.location;
+function ControlCntrl($scope, $http) {
+    $scope.Model = @Model.AsRawJson();
+
+    $scope.saveControllerModel = function () {
+        var url = modelUrl;
+        var data = { Uid: $scope.Model.Uid, Controller: $scope.Model.Controller };
+        $http.put(url, data)
+        .success(function(data,status,headers,config){
+            // handle success
+            if(data.success == true)
+            {
+                $scope.updateChart();
+            }
+            else 
+            {
+                //$scope.alert.error("There was an error saving the changes. " + data.Message);
+            }
+        }).error(function(data,status,headers,config) {
+            // handle failure
+            //$scope.alert.error("There was an error saving the changes. Try again?");   
+        });
+    };
+
+    $scope.enableState = function (item) {
+        var data = item;
+        var url = modelUrl + '/enable';
+        $http.put(url, data)
+        .success(function(data,status,headers,config){
+            // handle success
+            if(data.success == true)
+            {
+                item.State = true;
+            }
+            else 
+            {
+                //$scope.alert.error("There was an error saving the changes. " + data.Message);
+            }
+        }).error(function(data,status,headers,config) {
+            // handle failure
+            //$scope.alert.error("There was an error saving the changes. Try again?");   
+        });
+    };
+
+    $scope.disableState = function (item) {
+        var data = item;
+        var url = modelUrl + '/disable';
+        $http.put(url, data)
+        .success(function(data,status,headers,config){
+            // handle success
+            if(data.success == true)
+            {
+                item.State = false;
+            }
+            else 
+            {
+                //$scope.alert.error("There was an error saving the changes. " + data.Message);
+            }
+        }).error(function(data,status,headers,config) {
+            // handle failure
+            //$scope.alert.error("There was an error saving the changes. Try again?");   
+        });
+    };
+
+}
+
+</script>

@@ -1,0 +1,23 @@
+﻿@inherits ViewPage
+@{
+    ViewBag.Title = "RaspberryPi Irrigation Controller";
+}
+<div class="row" ng-app ng-controller="HomePageCntrl">
+    <p>
+        Welcome, this page contains information on the current status of the control system. That page can also be used to change the automatic schedule
+        and to control the system manually.
+    </p>    
+    <h3>System summary</h3>
+    <p>
+        To make it easier to get a quick look into the state of the system, here is a summary of the inputs and outputs from the PiFace addon.
+    </p>
+</div>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    var modelUrl = window.location;
+    function HomePageCntrl($scope, $http) {
+
+    }
+
+</script>

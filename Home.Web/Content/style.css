@@ -1,0 +1,193 @@
+﻿body 
+{
+    /*
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 120%;
+    line-height: 120%;
+    color: #444;
+    padding: 48px;
+    */
+    background: #e6e6e6 url(/images/gardermoen_station_wireframe.png);
+    background-attachment: fixed;
+}
+
+#page, #preview  {
+    box-shadow: 0 3px 8px rgba(100, 100, 100, 0.3);
+    /* font-size: 74%; */
+    padding: 10px 40px 20px 40px;
+	margin: auto;
+    max-width: 960px;
+}
+#page {
+    border-top: 2px solid #BDBEC0;
+    background: #fff url(/images/title-bg.png) no-repeat 0 5px;
+}
+
+#pageContent {
+    width: 80%;
+}
+
+#preview 
+{
+    margin: 40px auto;   
+    font-size: 13px;
+    line-height: 18px;
+}
+#preview h3 a {
+    color: green;
+}
+#preview h3 b 
+{
+    display: inline-block;
+    width: 100px;
+}
+#ss-link {
+    position: absolute;
+    display: block;
+    width: 450px;
+    height: 100px;
+    margin: 0 0 0 -30px;
+}
+a {
+    color: #093;
+}
+h1 {
+    color: seagreen;
+}
+h3 {
+    color: skyblue;
+    color: #666;
+}
+
+#bottom_Watermark li {
+    float: left;
+    list-style-type: none;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+#visual-sitemap {
+    float: right;
+    width: 220px;
+    margin: 0 -90px 0 0;
+    padding: 190px 0 0 48px;
+}
+#visual-sitemap a {
+    display: block;
+    margin: 20px 0 0 0;
+    line-height: 0;
+    box-shadow: 0 3px 8px rgba(100, 100, 100, 0.3);
+}
+#visual-sitemap a.button:hover {
+    background: rgba(170,255,170,.5);
+}
+#visual-sitemap img {
+    padding: 5px;
+    width: 150px;
+}
+#features li {
+    line-height: 22px;
+}
+
+
+#content {
+    padding: 0 0 10px 0;
+}     
+.clear {
+    display: block;
+    clear: both;
+    font-size: 1px;
+}
+#info {
+    float: right;
+    margin: -30px -38px 0 0;
+    padding: 0;
+    text-align: right;
+}
+#info h6 {
+    font-size: 13px;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+#info a {
+    margin: 0 5px 0 0;
+    color: #888;
+    float: right;
+    display: block;
+    line-height: 20px;
+}
+#home {
+    background: url(home-icon.jpg) no-repeat top right;
+    height: 20px;
+    width: 20px;
+    padding-left: 5px;
+    display: block;
+}
+blockquote {
+    border-left: 10px solid #E6E6E6;
+    margin: 0;
+    padding: 0 0 0 18px;
+    color: #888;
+}
+#content #splash {
+    float: right;
+    padding: 0 0 10px 20px;
+}
+dt {
+    width: 90px;
+    float: left;
+    clear: left;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    line-height: 22px;
+}
+dd {
+    line-height: 22px;
+}
+a {
+    color: blue;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.menu {
+}
+.menu ul {
+    border-bottom: 1px solid #EDEDED;
+    border-top: 1px solid #EDEDED;
+    display: inline-block;
+    font-size: 12px;
+    text-align: left;
+    width: 100%;    
+    text-indent: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    display: inline-block;
+    text-decoration: none;
+    margin: 0 40px 0 0;
+    position: relative;
+}
+.menu li.label {
+    display: inline-block;
+    width: 140px;
+    text-transform: uppercase;
+    color: #888;
+}
+.menu .active a {
+    color: #636363;
+    font-weight: bold;
+}
+.menu li a {
+    text-transform: uppercase;    
+    line-height: 44px;
+    color: #6A6A6A;
+}
+.menu li a:hover {
+    color: #000;
+    text-decoration: none;
+}

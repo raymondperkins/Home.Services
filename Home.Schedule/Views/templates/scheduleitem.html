@@ -1,0 +1,40 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Schedule item</h3>
+</div>
+<div class="modal-body">
+    <ul>
+        <li>
+            Enabled
+            <button type="button" class="btn btn-default" ng-model="Model.CanRun" btn-checkbox>Enabled</button>
+        </li>
+        <li>
+            Start date
+            <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="Model.From" is-open="dateFromOpened" datepicker-options="dateOptions" close-text="Close" />
+        </li>
+
+        <li>
+            Start time
+            <timepicker ng-model="Model.From" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker>
+        </li>
+        <li>
+            End date
+            <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="Model.To" is-open="dateToOpened" datepicker-options="dateOptions" close-text="Close" />
+        </li>
+        <li>
+            End time
+            <timepicker ng-model="Model.To" hour-step="1" minute-step="5" show-meridian="ismeridian"></timepicker>
+        </li>
+        <li>
+            Reoccur time
+            <select class="form-control" ng-model="Model.ReoccurSeconds" ng-options="opt.v as opt.n for opt in options.reoccur"></select>
+        </li>
+        
+    </ul>
+    Selected: <b>{{ selected.item }}</b>
+    From: {{Model.From}}
+    To: {{Model.To}}
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+</div>

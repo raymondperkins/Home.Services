@@ -1,0 +1,45 @@
+﻿<!doctype html>
+@{
+    ViewBag.SiteMapRoutes = Home.App.Instance.Routes;
+}
+<html lang="en-us">
+<head>
+    <title>Home services</title>
+    <link rel="stylesheet" href="/Content/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/Content/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="/Content/style.css" />
+
+    <script src="/scripts/jquery-1.9.0.min.js"></script>
+    <script src="/scripts/angular.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/ui-bootstrap-0.10.0.min.js"></script>
+    <script src="/scripts/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="/scripts/jquery.flot.min.js"></script>
+    <script src="/scripts/jquery.flot.time.min.js"></script>
+
+
+    <script type="text/javascript">
+        angular.module('homeServicesApp', ['ui.bootstrap']);
+    </script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div id="page" ng-app="homeServicesApp">
+        <div id="visual-sitemap">
+        @foreach(var route in ViewBag.SiteMapRoutes) {
+            <a class="button" href="@route.href"><img src="@route.img" alt="@route.alt" /></a>
+        }
+        </div>
+        <div id="pageHeader">
+            <h2 style="padding-top: 220px">@ViewBag.Title</h2>
+            @foreach(var route in ViewBag.SiteMapRoutes) {
+            <a class="button" href="@route.href">@route.href</a>
+            }
+        </div>
+        <div id="pageContent">
+            @RenderBody() 
+        </div>       
+    </div>
+  </div>
+</body>
+</html>

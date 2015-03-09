@@ -1,0 +1,9 @@
+assemblies_dir=@expanded_libdir@/@PACKAGE@
+Libraries=${assemblies_dir}/Mono.Upnp.dll
+
+Name: Mono.Upnp
+Description: Mono.Upnp
+Version: @VERSION@
+
+Requires: 
+Libs: -r:${assemblies_dir}/Mono.Upnp.dll

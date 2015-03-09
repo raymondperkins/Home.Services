@@ -1,0 +1,38 @@
+﻿@inherits ViewPage
+@{
+    ViewBag.Title = "Sensors";
+}
+
+<div class="row" ng-app ng-controller="SensorsCntrl">
+    <div class="col-md-12">
+        <p>
+        This page lists the sensors setup on this device. 
+        </p>
+    </div>
+    <div class="col-md-8">    
+        <table class="table table-striped">
+            <thead> 
+                <tr><th></th><th>Name</th><th>Type</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in Model | filter:FilterText | orderBy:'Name'">
+                <td><a href="{{UrlView(item)}}">View</a></td>
+                <td>{{item.Name}}</td>
+                <td>{{item.Type}}</td>    
+                <td>{{item.Value}} {{item.Unit}}</td>      
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+<script type="text/javascript">
+var modelUrl = window.location;
+function SensorsCntrl($scope, $http) {
+    $scope.Model = @Model.AsRawJson();
+    $scope.UrlView = function (item) { return modelUrl + '/' + item.Id; };
+}
+
+</script>

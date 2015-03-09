@@ -1,0 +1,98 @@
+﻿@inherits ViewPage
+
+@{
+    ViewBag.Title = "Network";
+}
+<div id="page">
+     <div id="visual-sitemap">
+         <a class="button" href="/"><img src="/img/Back-Arrow-Icon.png" alt="Return to main page" /></a>
+         <a class="button" href="/settings"><img src="/img/Setting-Gear-Icon.png" alt="Click to modify system settings" /></a>
+     </div>
+
+    <h2 style="padding-top: 220px">Information for the system's network connections</h2>
+    <p>
+        This page is used to view the status of the network connections. The information shown here is refreshed 
+        about four times a minute to ensure you have current diagnostic information. It is assumed this system
+        is used for cellular connections so if a connection is present then detailed information will be present.
+        This system will attempt to connect to a cellular modem and inquire specfic information so once again look 
+        further down the page to see the details.
+    </p>
+
+    <h3>Network interfaces detected</h3>
+    <p>
+        The below table lists the network devices that are present in this system. A status of up means
+        a connection is present. The type refer to the type of hardware and a full list of the definations
+        can be found <a href="http://msdn.microsoft.com/en-us/library/system.net.networkinformation.networkinterfacetype.aspx">here</a>.
+        Interfaces of interests are the wwan0, this is the name for a cellular modem and it will show on this list if it is attached and
+        functioning correctly. If the modem is present then this site will automatically display more detials for the cellular connection below.
+        The list is automatically refreshed every few seconds. 
+    </p>
+    <table class="table table-bordered">
+        <thead>
+            <tr><th>Interface</th><th>Status</th><th>Speed</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody data-bind="foreach: Records">
+            <tr>
+                <td data-bind="text: Name"></td>
+                <td data-bind="text: Status"></td>
+                <td data-bind="text: Speed"></td>
+                <td data-bind="text: Type"></td>
+                <td data-bind="text: Description"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div data-bind="if: HasWifi">
+        <!-- ko with: WifiInfo -->
+        <h3 data-bind="text: Name"></h3>
+        <p data-bind="text: ConfigText">
+
+        </p>
+        <!-- /ko -->
+    </div>
+
+        <div data-bind="if: HasCellular">
+        <!-- ko with: CelluarInfo -->
+        <h3 data-bind="text: Name"></h3>
+        <p data-bind="text: Description">
+
+        </p>
+        <!-- /ko -->
+    </div>
+    
+    <b class="clear"></b>
+</div>
+ 
+ 
+
+@section Scripts{
+    <script type="text/javascript">
+        //google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(setUpdateTimer(200));
+
+        /* define view model */
+        var viewModel;
+
+        function setUpdateTimer(timeout) {
+            setTimeout(function () { updateNetworks() }, timeout);
+        }
+
+        var upDateInProgress = false;
+        function updateNetworks() {
+            if (upDateInProgress) return;
+            upDateInProgress = true;
+
+            $.getJSON('/networks/info?format=json', function (data) {
+                if (viewModel == null) {
+                    viewModel = ko.mapping.fromJS(data);
+                    ko.applyBindings(viewModel);
+                }
+                else {
+                    ko.mapping.fromJS(data, viewModel);
+                }
+                setUpdateTimer(15000);
+                upDateInProgress = false;                
+            });
+        }
+    </script>    
+}
