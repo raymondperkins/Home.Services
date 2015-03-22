@@ -32,35 +32,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ServiceStack">
-      <HintPath>..\packages\ServiceStack.4.0.30\lib\net40\ServiceStack.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\libs\ServiceStack.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Client, Version=4.0.30.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Client.4.0.30\lib\net40\ServiceStack.Client.dll</HintPath>
+    <Reference Include="ServiceStack.Client">
+      <HintPath>..\libs\ServiceStack.Client.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common, Version=4.0.30.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Common.4.0.30\lib\net40\ServiceStack.Common.dll</HintPath>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\libs\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
-      <HintPath>..\packages\ServiceStack.Interfaces.4.0.30\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\libs\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\packages\ServiceStack.OrmLite.4.0.30\lib\net40\ServiceStack.OrmLite.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Razor">
-      <HintPath>..\packages\ServiceStack.Razor.4.0.30\lib\net40\ServiceStack.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text, Version=4.0.30.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Text.4.0.30\lib\net40\ServiceStack.Text.dll</HintPath>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\libs\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Razor.Unofficial">
-      <HintPath>..\packages\ServiceStack.Razor.4.0.30\lib\net40\System.Web.Razor.Unofficial.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,7 +65,6 @@
     <Compile Include="UpnpScheduleService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Views\schedular\GetSchedules.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -88,8 +74,12 @@
       <Project>{BD895880-E8FA-40BF-91E2-8E170D843B1E}</Project>
       <Name>Home</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mono.Ssdp\Mono.Ssdp\Mono.Ssdp.csproj">
+      <Project>{ad422a19-ba07-4039-b843-84e386804dd1}</Project>
+      <Name>Mono.Ssdp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mono.Upnp\Mono.Upnp\Mono.Upnp.csproj">
-      <Project>{5E5A8C5E-334D-4ED2-B40F-34712C7E085C}</Project>
+      <Project>{5e5a8c5e-334d-4ed2-b40f-34712c7e085c}</Project>
       <Name>Mono.Upnp</Name>
     </ProjectReference>
   </ItemGroup>
@@ -102,13 +92,6 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\ServiceStack.Razor.BuildTask.4.0.30\build\ServiceStack.Razor.BuildTask.targets" Condition="Exists('..\packages\ServiceStack.Razor.BuildTask.4.0.30\build\ServiceStack.Razor.BuildTask.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\ServiceStack.Razor.BuildTask.4.0.30\build\ServiceStack.Razor.BuildTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ServiceStack.Razor.BuildTask.4.0.30\build\ServiceStack.Razor.BuildTask.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

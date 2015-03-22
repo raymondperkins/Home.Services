@@ -32,19 +32,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ServiceStack">
-      <HintPath>..\packages\ServiceStack.4.0.24\lib\net40\ServiceStack.dll</HintPath>
+      <HintPath>..\libs\ServiceStack.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Client">
-      <HintPath>..\packages\ServiceStack.Client.4.0.24\lib\net40\ServiceStack.Client.dll</HintPath>
+      <HintPath>..\libs\ServiceStack.Client.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.4.0.24\lib\net40\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\libs\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Interfaces.4.0.24\lib\net40\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\libs\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Text.4.0.24\lib\net40\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\libs\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,7 +64,6 @@
     <Compile Include="SensorsService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Views\sensors\SensorModel.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -77,8 +76,12 @@
       <Project>{BD895880-E8FA-40BF-91E2-8E170D843B1E}</Project>
       <Name>Home</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mono.Ssdp\Mono.Ssdp\Mono.Ssdp.csproj">
+      <Project>{ad422a19-ba07-4039-b843-84e386804dd1}</Project>
+      <Name>Mono.Ssdp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mono.Upnp\Mono.Upnp\Mono.Upnp.csproj">
-      <Project>{5E5A8C5E-334D-4ED2-B40F-34712C7E085C}</Project>
+      <Project>{5e5a8c5e-334d-4ed2-b40f-34712c7e085c}</Project>
       <Name>Mono.Upnp</Name>
     </ProjectReference>
   </ItemGroup>
